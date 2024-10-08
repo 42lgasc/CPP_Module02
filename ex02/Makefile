@@ -6,13 +6,13 @@
 #    By: lgasc <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 18:19:19 by lgasc             #+#    #+#              #
-#    Updated: 2024/10/08 17:12:17 by lgasc            ###   ########.fr        #
+#    Updated: 2024/10/08 19:51:56 by lgasc            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= Towards_a_more_useful_fixed-point_number_class
+NAME			= Now_we_are_talking
 MAIN			= main.cpp
-DEFINITIONS		= METHOD_INFO=false SPECIAL_INFO=true
+DEFINITIONS		= METHOD_INFO=false SPECIAL_INFO=false
 CLASSES			= Fixed #$(NAME)
 SOURCES			= $(addsuffix .cpp, $(CLASSES)) #$(MAIN)
 HEADERS			= $(addsuffix .hpp, $(CLASSES))
@@ -24,7 +24,7 @@ DEP				= $(DEPENDENCY)
 #OBJECTS		= $(SOURCES:.c=.o) $(LIB_ARCHIVES)
 OBJECTS			= $(SOURCES:.cpp=.o) $(LIB_ARCHIVES)
 
-CPPFLAGS		+= $(addprefix -D, $(DEFINITIONS))
+CPPFLAGS		= $(addprefix -D, $(DEFINITIONS))
 
 # https://stackoverflow.com/a/56290397/22306298
 CCFLAGS			+= -Wall -Wstrict-overflow=5 \
@@ -83,10 +83,10 @@ RM_M			= $(REMOVING_MORE)
 REMOVING_END	= '$(G_C)$(BACKQUOTE)...$(RESET)'
 RM_E			= $(REMOVING_END)
 
-DIRT			= 'TODO|FIXME|XXX|(?<!'\'')\?|\?(?!'\'')|! ?!|DEPREC\w*$\
-				  |[Dd]eprec\w*|(?:w?c)?log|(?<![/:])/([*/])(?! |!|\1)$\
-				  |(?:\t|.{4}){20}.|\b(?!$(LABEL_ALLOW))[A-Z_a-z]+:(?![":])'
-LABEL_ALLOW		= By|Created|Updated|https|public|private|default|c_
+DIRT			= 'TODO|FIXME|XXX|(?<!'\'')\?|\?(?!'\'')|! ?!$\
+	|DEPREC\w*|[Dd]eprec\w*|(?:w?c)?log|(?<![/:])/([*/])(?! |!|\1)$\
+	|(?:\t|.{4}){20}.|\b(?!$(LABEL_ALLOW))[A-Z_a-z]+:(?![":])'
+LABEL_ALLOW		= By|Created|Updated|https|public|private|default|c_[a-z]+
 
 
 
@@ -125,7 +125,7 @@ ifeq "$(filter clean fclean, $(MAKECMDGOALS))" ""
 endif
 
 $(DEP):		$(MAIN) $(SOURCES)
-	$(CPP) -MM $^ > $@
+	$(CC) -MM $^ > $@
 	echo -e '$(G_Y)Dependency file `$(L_C)$@$(G_C)` made.$(RESET)'
 	 # This is the only place where `-e` is necessary. Why?
 

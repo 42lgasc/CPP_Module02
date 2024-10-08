@@ -6,12 +6,13 @@
 #    By: lgasc <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 18:19:19 by lgasc             #+#    #+#              #
-#    Updated: 2024/10/04 16:27:33 by lgasc            ###   ########.fr        #
+#    Updated: 2024/10/08 17:15:10 by lgasc            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= My_First_Class_in_Orthodox_Canonical_Form
 MAIN			= main.cpp
+DEFINITIONS		= METHOD_INFO=true SPECIAL_INFO=true
 CLASSES			= Fixed #$(NAME)
 SOURCES			= $(MAIN) $(addsuffix .cpp, $(CLASSES))
 HEADERS			= $(addsuffix .hpp, $(CLASSES))
@@ -22,6 +23,8 @@ DEP				= $(DEPENDENCY)
 #LIB_ARCHIVES	= $(LIBFT)
 #OBJECTS		= $(SOURCES:.c=.o) $(LIB_ARCHIVES)
 OBJECTS			= $(SOURCES:.cpp=.o) $(LIB_ARCHIVES)
+
+CPPFLAGS		+= $(addprefix -D, $(DEFINITIONS))
 
 # https://stackoverflow.com/a/56290397/22306298
 CCFLAGS			+= -Wall -Wstrict-overflow=5 \
@@ -81,8 +84,9 @@ REMOVING_END	= '$(G_C)$(BACKQUOTE)...$(RESET)'
 RM_E			= $(REMOVING_END)
 
 DIRT			= 'TODO|FIXME|XXX|(?<!'\'')\?|\?(?!'\'')|! ?!|DEPREC\w*$\
-	|[Dd]eprec\w*|(?:w?c)?log|(?<![/:])/([*/])(?! |!|\1)|(?:\t|.{4}){20}.$\
-	|\b(?!By|Created|Updated|public|private|default|c_)[A-Z_a-z]+:(?![":])'
+				  |[Dd]eprec\w*|(?:w?c)?log|(?<![/:])/([*/])(?! |!|\1)$\
+				  |(?:\t|.{4}){20}.|\b(?!$(LABEL_ALLOW))[A-Z_a-z]+:(?![":])'
+LABEL_ALLOW		= By|Created|Updated|https|public|private|default|c_[a-z]+
 
 
 
