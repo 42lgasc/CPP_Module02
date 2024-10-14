@@ -6,7 +6,7 @@
 #    By: lgasc <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 18:19:19 by lgasc             #+#    #+#              #
-#    Updated: 2024/10/08 21:19:04 by lgasc            ###   ########.fr        #
+#    Updated: 2024/10/14 19:29:39 by lgasc            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ RM_E			= $(REMOVING_END)
 
 DIRT			= 'TODO|FIXME|XXX|(?<!'\'')\?|\?(?!'\'')|! ?!$\
 	|DEPREC\w*|[Dd]eprec\w*|(?:w?c)?log|(?<![/:])/([*/])(?! |!|\1)$\
-	|(?:\t|.{4}){20}.|\b(?!$(LABEL_ALLOW))[A-Z_a-z]+:(?![":])'
+	|(?:[^\t]{0,2}\t|....){20}(?=.)|\b(?!$(LABEL_ALLOW))[A-Z_a-z]+:(?![":])'
 LABEL_ALLOW		= By|Created|Updated|https|public|private|default|c_[a-z]+
 
 
